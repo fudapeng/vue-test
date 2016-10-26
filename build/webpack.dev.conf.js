@@ -25,8 +25,9 @@ var plugins = [
   pages.forEach((page) => {
     const htmlPlugin = new HtmlWebpackPlugin({
       filename: page[0]+'.html',
-      template: './html/' + page[0]+'.html',
-      inject: true
+      template: page[1]+'.html',
+      inject: true,
+      chunks:[page[0]]//指定js模块
     })
     plugins.push(htmlPlugin);
   })

@@ -3,6 +3,7 @@ var config = require('../config')
 var utils = require('./utils')
 var webpack = require('webpack')
 var merge = require('webpack-merge')
+var pages = require('../config/entry-page-config')
 var baseWebpackConfig = require('./webpack.base.conf')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -40,7 +41,7 @@ var webpackConfig = merge(baseWebpackConfig, {
     // generate dist index.html with correct asset hash for caching.
     // you can customize output by editing /index.html
     // see https://github.com/ampedandwired/html-webpack-plugin
-    new HtmlWebpackPlugin({
+    /*new HtmlWebpackPlugin({
       filename: config.build.index,
       template: 'index.html',
       inject: true,
@@ -53,7 +54,7 @@ var webpackConfig = merge(baseWebpackConfig, {
       },
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
       chunksSortMode: 'dependency'
-    }),
+    }),*/
     // split vendor js into its own file
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
@@ -76,6 +77,22 @@ var webpackConfig = merge(baseWebpackConfig, {
     })
   ]
 })
+//打包html
+pages.forEach((page) => {
+    const htmlPlugin = new HtmlWebpackPlugin({
+      filename: page[0]+'.html',
+      template: page[1]+'.html',
+      inject: true,
+      chunks:[page[0]],
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeAttributeQuotes: true
+      },
+      chunksSortMode: 'dependency'
+    })
+    webpackConfig.plugins.push(htmlPlugin);
+  })
 
 if (config.build.productionGzip) {
   var CompressionWebpackPlugin = require('compression-webpack-plugin')

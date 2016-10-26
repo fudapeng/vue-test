@@ -20,6 +20,8 @@
 	      {{ item }}
 	    </span>
 	  </transition-group>
+
+
 </div>
 
 
@@ -27,8 +29,8 @@
 </template>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.14.1/lodash.min.js"></script>
 <script>
-import Store from  './store'
-import myFooter from  './components/footer.vue'
+import Store from  '../../store'
+import myFooter from  '../../components/footer.vue'
 
 	export default {
 		components: {

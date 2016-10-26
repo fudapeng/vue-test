@@ -1,4 +1,5 @@
 module.exports = [
-	['index','./src/main.js'],
-	['todo','./src/todo.js']
+	['index','./src/module/index/index'],
+	['todo','./src/module/todo/todo'],
+	['login','./src/module/login/login']
 ]

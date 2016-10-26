@@ -3,14 +3,16 @@ var config = require('../config')
 var utils = require('./utils')
 var projectRoot = path.resolve(__dirname, '../')
 var pages = require('../config/entry-page-config')
-
+console.log(utils.cssLoaders())
 module.exports = {
   entry: function () {
     var entries = {}
     pages.forEach((page) => {
-      entries[page[0]] = page[1];
+      entries[page[0]] = page[1] + '.js';
     })
+    console.log(entries);
     return entries;
+
   }(),
   output: {
     path: config.build.assetsRoot,
